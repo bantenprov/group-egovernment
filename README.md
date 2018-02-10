@@ -24,7 +24,6 @@ bash
 $ git clone https://github.com/bantenprov/group-government.git
 ~~~
 
-
 #### Edit `config/app.php` :
 ```php
 
@@ -72,7 +71,6 @@ $ php artisan db:seed --class=BantenprovGroupEgovernmentSeeder
 
 ```bash
 $ php artisan vendor:publish --tag=group-egovernment-assets
-$ php artisan vendor:publish --tag=group-egovernment-public
 ```
 #### Tambahkan route di dalam file : `resources/assets/js/routes.js` :
 
