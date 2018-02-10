@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GroupEgovernment extends Model
 {
-    // protected $table = 'group_egovernments';
-    public $timestamps = true;
-
     use SoftDeletes;
 
+    public $timestamps = true;
+
+    protected $table = 'group_egovernments';
     protected $dates = [
         'deleted_at'
     ];
