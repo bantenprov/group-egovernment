@@ -2,7 +2,7 @@
 
 namespace Bantenprov\GroupEgovernment\Http\Controllers;
 
-use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment as GroupEgovernment;
+use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
