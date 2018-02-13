@@ -52,7 +52,7 @@ $ php artisan migrate
 #### Publish database seeder :
 
 ```bash
-$ php artisan vendor:publish --tag=group-eegovernment-seeds
+$ php artisan vendor:publish --tag=group-egovernment-seeds
 ```
 
 #### Lakukan Auto Dump :
@@ -84,7 +84,7 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
         {
             path: '/admin/dashboard/group-egovernment',
             components: {
-                main: resolve => require(['./components/bantenprov/group-egovernment/GroupEgovernmentAdmin.show.vue'], resolve),
+                main: resolve => require(['./components/bantenprov/group-egovernment/GroupEgovernment.index.vue'], resolve),
                 navbar: resolve => require(['./components/Navbar.vue'], resolve),
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
