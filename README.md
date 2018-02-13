@@ -10,18 +10,18 @@
 
 - Development snapshot
 ```bash
-$ composer require bantenprov/group-government:dev-master
+$ composer require bantenprov/group-egovernment:dev-master
 ```
 - Latest release:
 
 ```bash
-$ composer require bantenprov/group-government
+$ composer require bantenprov/group-egovernment
 ```
 
 ### Download via github
 ~~~
 bash
-$ git clone https://github.com/bantenprov/group-government.git
+$ git clone https://github.com/bantenprov/group-egovernment.git
 ~~~
 
 #### Edit `config/app.php` :
@@ -52,7 +52,7 @@ $ php artisan migrate
 #### Publish database seeder :
 
 ```bash
-$ php artisan vendor:publish --tag=group-egovernment-seeds
+$ php artisan vendor:publish --tag=group-eegovernment-seeds
 ```
 
 #### Lakukan Auto Dump :
