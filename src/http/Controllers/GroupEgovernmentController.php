@@ -63,9 +63,11 @@ class GroupEgovernmentController extends Controller
      */
     public function create()
     {
-        return response()->json([
-            'group_egovernment' => new GroupEgovernment,
-        ]);
+        $group_egovernment = new GroupEgovernment;
+
+        $response['group_egovernment'] = $group_egovernment;
+        $response['status'] = true;
+
         return response()->json($group_egovernment);
     }
 
