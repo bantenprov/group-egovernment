@@ -49,10 +49,9 @@ class GroupEgovernmentController extends Controller
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        $response = $query->paginate($perPage);
 
-        return response()->json(
-                $query->paginate($perPage)
-            )
+        return response()->json($response)
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET');
     }
@@ -67,6 +66,7 @@ class GroupEgovernmentController extends Controller
         return response()->json([
             'group_egovernment' => new GroupEgovernment,
         ]);
+        return response()->json($group_egovernment);
     }
 
     /**
@@ -79,10 +79,10 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = GroupEgovernment::findOrFail($id);
 
-        return response()->json([
-            'label' => $group_egovernment->label,
-            'description' => $group_egovernment->description,
-        ]);
+        $response['group_egovernment'] = $group_egovernment;
+        $response['status'] = true;
+
+        return response()->json($response);
     }
 
     /**
@@ -93,7 +93,14 @@ class GroupEgovernmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group_egovernment = new GroupEgovernment;
+        $group_egovernment->label = $request->get('label');
+        $group_egovernment->description = $request->get('description');
+        $group_egovernment->save();
+
+        $response['status'] = true;
+
+        return response()->json($response);
     }
 
     /**
@@ -106,10 +113,10 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = GroupEgovernment::findOrFail($id);
 
-        return response()->json([
-            'label' => $group_egovernment->label,
-            'description' => $group_egovernment->description,
-        ]);
+        $response['group_egovernment'] = $group_egovernment;
+        $response['status'] = true;
+
+        return response()->json($response);
     }
 
     /**
@@ -121,7 +128,14 @@ class GroupEgovernmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $group_egovernment = GroupEgovernment::findOrFail($id);
+        $group_egovernment->label = $request->get('label');
+        $group_egovernment->description = $request->get('description');
+        $group_egovernment->save();
+
+        $response['status'] = true;
+
+        return response()->json($response);
     }
 
     /**
@@ -135,12 +149,12 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = GroupEgovernment::findOrFail($id);
 
         if ($group_egovernment->delete()) {
-            $respond['status'] = true;
+            $response['status'] = true;
         } else {
-            $respond['status'] = false;
+            $response['status'] = false;
         }
 
-        return json_encode($respond);
+        return json_encode($response);
     }
 }
 

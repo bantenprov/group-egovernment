@@ -1,62 +1,62 @@
 <template>
-  <div>
-    <div class="card mb-3">
-      <div class="card-header">
-        <i class="fa fa-table" aria-hidden="true"></i> Group Government
+  <div class="card">
+    <div class="card-header">
+      <i class="fa fa-table" aria-hidden="true"></i> Group Government
 
-        <ul class="nav nav-pills card-header-pills pull-right">
-          <li class="nav-item">
-            <button class="btn btn-primary btn-sm" role="button" @click="create">Add</button>
-          </li>
-        </ul>
+      <ul class="nav nav-pills card-header-pills pull-right">
+        <li class="nav-item">
+          <button class="btn btn-primary btn-sm" role="button" @click="createRow">
+          	<i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <vuetable-filter-bar></vuetable-filter-bar>
       </div>
 
-      <div class="card-body">
-		    <div class="d-flex justify-content-between align-items-center">
-		      <vuetable-filter-bar></vuetable-filter-bar>
-		    </div>
-
-        <div style="margin:20px 0;">
-          <div v-if="loading" class="d-flex justify-content-start align-items-center">
-            <i class="fa fa-refresh fa-spin fa-fw"></i>
-            <span>Loading...</span>
-          </div>
+      <div style="margin:20px 0;">
+        <div v-if="loading" class="d-flex justify-content-start align-items-center">
+          <i class="fa fa-refresh fa-spin fa-fw"></i>
+          <span>Loading...</span>
         </div>
+      </div>
 
-		    <vuetable ref="vuetable"
-		      api-url="/api/group-egovernment"
-		      :fields="fields"
-		      :sort-order="sortOrder"
-		      :css="css.table"
-		      pagination-path=""
-		      :per-page="5"
-		      :append-params="moreParams"
-		      @vuetable:pagination-data="onPaginationData"
-		      @vuetable:loading="onLoading"
-		      @vuetable:loaded="onLoaded">
-		      <template slot="actions" slot-scope="props">
-		        <div class="btn-group pull-right" role="group" style="display:flex;">
-              <!--<button class="btn btn-info btn-sm" role="button" @click="viewRow(props.rowData)">
-                <span class="fa fa-eye"></span>
-              </button>-->
-              <button class="btn btn-warning btn-sm" role="button" @click="editRow(props.rowData)">
-                <span class="fa fa-pencil"></span>
-              </button>
-		          <button class="btn btn-danger btn-sm" role="button" @click="deleteRow(props.rowData)">
-		            <span class="fa fa-trash"></span>
-		          </button>
-		        </div>
-		      </template>
-		    </vuetable>
+      <vuetable ref="vuetable"
+        api-url="/api/group-egovernment"
+        :fields="fields"
+        :sort-order="sortOrder"
+        :css="css.table"
+        pagination-path=""
+        :per-page="5"
+        :append-params="moreParams"
+        @vuetable:pagination-data="onPaginationData"
+        @vuetable:loading="onLoading"
+        @vuetable:loaded="onLoaded">
+        <template slot="actions" slot-scope="props">
+          <div class="btn-group pull-right" role="group" style="display:flex;">
+            <!--<button class="btn btn-info btn-sm" role="button" @click="viewRow(props.rowData)">
+              <span class="fa fa-eye"></span>
+            </button>-->
+            <button class="btn btn-warning btn-sm" role="button" @click="editRow(props.rowData)">
+              <span class="fa fa-pencil"></span>
+            </button>
+            <button class="btn btn-danger btn-sm" role="button" @click="deleteRow(props.rowData)">
+              <span class="fa fa-trash"></span>
+            </button>
+          </div>
+        </template>
+      </vuetable>
 
-        <div class="d-flex justify-content-between align-items-center">
-          <vuetable-pagination-info ref="paginationInfo"
-          ></vuetable-pagination-info>
-		      <vuetable-pagination ref="pagination"
-            :css="css.pagination"
-		        @vuetable-pagination:change-page="onChangePage">
-		      </vuetable-pagination>
-		    </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <vuetable-pagination-info ref="paginationInfo"
+        ></vuetable-pagination-info>
+        <vuetable-pagination ref="pagination"
+          :css="css.pagination"
+          @vuetable-pagination:change-page="onChangePage">
+        </vuetable-pagination>
       </div>
     </div>
   </div>
@@ -71,6 +71,7 @@
   white-space: normal;
 }
 </style>
+
 <script>
 import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo';
 
@@ -114,7 +115,7 @@ export default {
       moreParams: {},
       css: {
         table: {
-          tableClass: 'table table-hover table-responsive-xl',
+          tableClass: 'table table-hover',
           ascendingIcon: 'fa fa-chevron-up',
           descendingIcon: 'fa fa-chevron-down'
         },
@@ -135,15 +136,8 @@ export default {
     }
   },
   methods: {
-    onPaginationData(paginationData) {
-      this.$refs.pagination.setPaginationData(paginationData);
-      this.$refs.paginationInfo.setPaginationData(paginationData);
-    },
-    onChangePage(page) {
-      this.$refs.vuetable.changePage(page);
-    },
-    create() {
-        window.location = '#/admin/group-egovernment/create';
+    createRow() {
+      window.location = '#/admin/group-egovernment/create';
     },
     viewRow(rowData) {
       window.location = '#/admin/group-egovernment/' + rowData.id;
@@ -167,6 +161,13 @@ export default {
             alert('Break');
           });
       }
+    },
+    onPaginationData(paginationData) {
+      this.$refs.pagination.setPaginationData(paginationData);
+      this.$refs.paginationInfo.setPaginationData(paginationData);
+    },
+    onChangePage(page) {
+      this.$refs.vuetable.changePage(page);
     },
     onLoading: function() {
       this.loading = true;
