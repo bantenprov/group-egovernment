@@ -83,7 +83,7 @@ class GroupEgovernmentController extends Controller
 
         $this->validate($request, [
             'label' => 'required|max:16',
-            'description' => 'required|max:255',
+            'description' => 'max:255',
         ]);
 
         $group_egovernment->label = $request->get('label');
@@ -121,11 +121,6 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = GroupEgovernment::findOrFail($id);
 
-        $this->validate($request, [
-            'label' => 'required|max:16',
-            'description' => 'required|max:255',
-        ]);
-
         $response['group_egovernment'] = $group_egovernment;
         $response['status'] = true;
 
@@ -142,6 +137,12 @@ class GroupEgovernmentController extends Controller
     public function update(Request $request, $id)
     {
         $group_egovernment = GroupEgovernment::findOrFail($id);
+
+        $this->validate($request, [
+            'label' => 'required|max:16',
+            'description' => 'max:255',
+        ]);
+
         $group_egovernment->label = $request->get('label');
         $group_egovernment->description = $request->get('description');
         $group_egovernment->save();

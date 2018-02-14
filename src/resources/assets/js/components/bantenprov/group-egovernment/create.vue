@@ -62,9 +62,9 @@ export default {
     onSubmit: function() {
       let app = this;
 
-      //if (this.formstate.$invalid) {
-      //  return;
-      //} else {
+      if (this.state.$invalid) {
+        return;
+      } else {
 
         axios.post('api/group-egovernment', {
             label: this.model.label,
@@ -80,7 +80,7 @@ export default {
           .catch(function(response) {
             alert('Break');
           });
-      //}
+      }
     },
     reset() {
       this.model = {
