@@ -82,9 +82,9 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
     children: [
         //== ...
         {
-            path: '/admin/dashboard/group-egovernment',
+            path: '/admin/group-egovernment',
             components: {
-                main: resolve => require(['./components/bantenprov/group-egovernment/GroupEgovernment.index.vue'], resolve),
+                main: resolve => require(['./components/bantenprov/group-egovernment/index.vue'], resolve),
                 navbar: resolve => require(['./components/Navbar.vue'], resolve),
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
@@ -92,6 +92,38 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
                 title: "Group Government"
             }
         },
+        {
+            path: '/admin/group-egovernment/create',
+            components: {
+                main: resolve => require(['./components/bantenprov/group-egovernment/create.vue'], resolve),
+                navbar: resolve => require(['./components/Navbar.vue'], resolve),
+                sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
+            },
+            meta: {
+                title: "Create Group Government"
+        },
+        {
+            path: '/admin/group-egovernment/:id',
+            components: {
+                main: resolve => require(['./components/bantenprov/group-egovernment/view.vue'], resolve),
+                navbar: resolve => require(['./components/Navbar.vue'], resolve),
+                sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
+            },
+            meta: {
+                title: "View Group Government"
+            }
+        },
+        {
+            path: '/admin/group-egovernment/:id/edit',
+            components: {
+                main: resolve => require(['./components/bantenprov/group-egovernment/edit.vue'], resolve),
+                navbar: resolve => require(['./components/Navbar.vue'], resolve),
+                sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
+            },
+            meta: {
+                title: "Edit Group Government"
+            }
+        }
         //== ...
     ]
 },
@@ -108,7 +140,7 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
         //== ...
         {
             name: 'Group Government',
-            link: '/admin/dashboard/group-egovernment',
+            link: '/admin/group-egovernment',
             icon: 'fa fa-angle-double-right'
         },
         //== ...
