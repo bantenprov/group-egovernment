@@ -4,7 +4,7 @@ use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernm
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class BantenprovGroupEgovernmentSeeder extends Seeder
+class Bantenprov_GroupEgovernmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.

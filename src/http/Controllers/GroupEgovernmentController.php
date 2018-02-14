@@ -49,10 +49,9 @@ class GroupEgovernmentController extends Controller
         }
 
         $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        $response = $query->paginate($perPage);
 
-        return response()->json(
-                $query->paginate($perPage)
-            )
+        return response()->json($response)
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET');
     }
@@ -64,9 +63,36 @@ class GroupEgovernmentController extends Controller
      */
     public function create()
     {
-        return response()->json([
-            'group_egovernment' => new GroupEgovernment,
+        $group_egovernment = new GroupEgovernment;
+
+        $response['group_egovernment'] = $group_egovernment;
+        $response['status'] = true;
+
+        return response()->json($group_egovernment);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\GroupEgovernment  $group_egovernment
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $group_egovernment = new GroupEgovernment;
+
+        $this->validate($request, [
+            'label' => 'required|max:16',
+            'description' => 'max:255',
         ]);
+
+        $group_egovernment->label = $request->get('label');
+        $group_egovernment->description = $request->get('description');
+        $group_egovernment->save();
+
+        $response['status'] = true;
+
+        return response()->json($response);
     }
 
     /**
@@ -77,52 +103,72 @@ class GroupEgovernmentController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $group_egovernment = GroupEgovernment::findOrFail($id);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Pendaftaran  $pendaftaran
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $response['group_egovernment'] = $group_egovernment;
+        $response['status'] = true;
+
+        return response()->json($response);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Pendaftaran  $pendaftaran
+     * @param  \App\GroupEgovernment  $group_egovernment
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $group_egovernment = GroupEgovernment::findOrFail($id);
+
+        $response['group_egovernment'] = $group_egovernment;
+        $response['status'] = true;
+
+        return response()->json($response);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pendaftaran  $pendaftaran
+     * @param  \App\GroupEgovernment  $group_egovernment
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $group_egovernment = GroupEgovernment::findOrFail($id);
+
+        $this->validate($request, [
+            'label' => 'required|max:16',
+            'description' => 'max:255',
+        ]);
+
+        $group_egovernment->label = $request->get('label');
+        $group_egovernment->description = $request->get('description');
+        $group_egovernment->save();
+
+        $response['status'] = true;
+
+        return response()->json($response);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Pendaftaran  $pendaftaran
+     * @param  \App\GroupEgovernment  $group_egovernment
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $group_egovernment = GroupEgovernment::findOrFail($id);
+
+        if ($group_egovernment->delete()) {
+            $response['status'] = true;
+        } else {
+            $response['status'] = false;
+        }
+
+        return json_encode($response);
     }
 }
 
