@@ -3,8 +3,13 @@
 
     <div class="card mb-3">
       <div class="card-header">
-        <i class="fa fa-table" aria-hidden="true"></i> Create Group Government
-        <a class="btn btn-primary pull-right" @click="back" role="button">Back</a>
+        <i class="fa fa-table" aria-hidden="true"></i> Add Group Government
+
+        <ul class="nav nav-pills card-header-pills pull-right">
+          <li class="nav-item">
+            <button class="btn btn-primary btn-sm" role="button" @click="back">Back</button>
+          </li>
+        </ul>
       </div>
 
       <div class="card-body">
@@ -34,7 +39,7 @@
             <div class="col-auto mb-2">
               <button type="submit" class="btn btn-primary">Submit</button>
 
-              <button type="reset" class="btn btn-effect-ripple btn-secondary reset_btn1" @click="form_reset">Reset</button>
+              <button type="reset" class="btn btn-secondary" @click="form_reset">Reset</button>
             </div>
           </div>
         </vue-form>
@@ -46,7 +51,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       formstate: {},
       model: {

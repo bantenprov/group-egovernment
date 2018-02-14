@@ -77,13 +77,18 @@ class GroupEgovernmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $group_egovernment = GroupEgovernment::findOrFail($id);
+
+        return response()->json([
+            'label' => $group_egovernment->label,
+            'description' => $group_egovernment->description,
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Pendaftaran  $pendaftaran
+     * @param  \App\GroupEgovernment  $group_egovernment
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -94,19 +99,24 @@ class GroupEgovernmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Pendaftaran  $pendaftaran
+     * @param  \App\GroupEgovernment  $group_egovernment
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $group_egovernment = GroupEgovernment::findOrFail($id);
+
+        return response()->json([
+            'label' => $group_egovernment->label,
+            'description' => $group_egovernment->description,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Pendaftaran  $pendaftaran
+     * @param  \App\GroupEgovernment  $group_egovernment
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -117,12 +127,20 @@ class GroupEgovernmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Pendaftaran  $pendaftaran
+     * @param  \App\GroupEgovernment  $group_egovernment
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $group_egovernment = GroupEgovernment::findOrFail($id);
+
+        if ($group_egovernment->delete()) {
+            $respond['status'] = true;
+        } else {
+            $respond['status'] = false;
+        }
+
+        return json_encode($respond);
     }
 }
 
