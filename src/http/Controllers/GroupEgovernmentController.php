@@ -72,6 +72,30 @@ class GroupEgovernmentController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\GroupEgovernment  $group_egovernment
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $group_egovernment = new GroupEgovernment;
+
+        $this->validate($request, [
+            'label' => 'required|max:16',
+            'description' => 'required|max:255',
+        ]);
+
+        $group_egovernment->label = $request->get('label');
+        $group_egovernment->description = $request->get('description');
+        $group_egovernment->save();
+
+        $response['status'] = true;
+
+        return response()->json($response);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -88,24 +112,6 @@ class GroupEgovernmentController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\GroupEgovernment  $group_egovernment
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $group_egovernment = new GroupEgovernment;
-        $group_egovernment->label = $request->get('label');
-        $group_egovernment->description = $request->get('description');
-        $group_egovernment->save();
-
-        $response['status'] = true;
-
-        return response()->json($response);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\GroupEgovernment  $group_egovernment
@@ -114,6 +120,11 @@ class GroupEgovernmentController extends Controller
     public function edit($id)
     {
         $group_egovernment = GroupEgovernment::findOrFail($id);
+
+        $this->validate($request, [
+            'label' => 'required|max:16',
+            'description' => 'required|max:255',
+        ]);
 
         $response['group_egovernment'] = $group_egovernment;
         $response['status'] = true;

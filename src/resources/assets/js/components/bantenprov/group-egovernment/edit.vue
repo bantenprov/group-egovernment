@@ -85,10 +85,8 @@ export default {
             description: this.model.description
           })
           .then(response => {
-            app.back();
-
             if (response.data.status == true) {
-              
+              app.back();
             } else {
               alert('Failed');
             }
