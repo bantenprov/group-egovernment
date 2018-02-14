@@ -35,7 +35,7 @@
 		      @vuetable:loading="onLoading"
 		      @vuetable:loaded="onLoaded">
 		      <template slot="actions" slot-scope="props">
-		        <div class="table-button-container pull-right">
+		        <div class="btn-group pull-right" role="group" style="display:flex;">
               <!--<button class="btn btn-info btn-sm" role="button" @click="viewRow(props.rowData)">
                 <span class="fa fa-eye"></span>
               </button>-->
@@ -62,6 +62,15 @@
   </div>
 </template>
 
+<style>
+.vuetable-th-sequence{
+  width: 1px;
+}
+.vuetable-th-slot-actions {
+  width: 1px;
+  white-space: normal;
+}
+</style>
 <script>
 import VuetablePaginationInfo from 'vuetable-2/src/components/VuetablePaginationInfo';
 
@@ -73,18 +82,30 @@ export default {
     return {
       loading: true,
       fields: [
-        '__sequence',
+        {
+          name: '__sequence',
+          title: '#',
+          titleClass: 'center aligned',
+          dataClass: 'right aligned'
+        },
         {
           name: 'label',
           title: 'Label',
-          sortField: 'label'
+          sortField: 'label',
+          titleClass: 'center aligned'
         },
         {
           name: 'description',
           title: 'Description',
-          sortField: 'description'
+          sortField: 'description',
+          titleClass: 'center aligned'
         },
-        '__slot:actions'
+        {
+          name: '__slot:actions',
+          title: 'Actions',
+          titleClass: 'center aligned',
+          dataClass: 'center aligned'
+        },
       ],
       sortOrder: [{
         field: 'label',
@@ -98,7 +119,7 @@ export default {
           descendingIcon: 'fa fa-chevron-down'
         },
         pagination: {
-          wrapperClass: 'vuetable-pagination btn-group ui basic segment grid',
+          wrapperClass: 'vuetable-pagination btn-group',
           activeClass: 'active',
           disabledClass: 'disabled',
           pageClass: 'btn btn-light',
