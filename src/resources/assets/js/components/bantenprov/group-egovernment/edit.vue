@@ -17,6 +17,7 @@
         <div class="form-row">
           <div class="col-md">
             <validate tag="div">
+              <input type="hidden" v-model="model.old_label" name="old_label">
               <input class="form-control" v-model="model.label" required autofocus name="label" type="text" placeholder="Label">
 
               <field-messages name="label" show="$invalid && $submitted" class="text-danger">
@@ -54,6 +55,7 @@ export default {
       .then(response => {
         if (response.data.status == true) {
           this.model.label = response.data.group_egovernment.label;
+          this.model.old_label = response.data.group_egovernment.label;
           this.model.description = response.data.group_egovernment.description;
         } else {
           alert('Failed');
@@ -61,6 +63,7 @@ export default {
       })
       .catch(function(response) {
         alert('Break');
+        window.location.href = '#/admin/group-egovernment';
       });
   },
   data() {
@@ -76,23 +79,26 @@ export default {
     onSubmit: function() {
       let app = this;
 
-      //if (this.formstate.$invalid) {
-      //  return;
-      //} else {
-
         axios.put('api/group-egovernment/' + this.$route.params.id, {
             label: this.model.label,
-            description: this.model.description
+            description: this.model.description,
+            old_label: this.model.old_label
           })
           .then(response => {
             if (response.data.status == true) {
-              app.back();
+              if(response.data.message == 'success'){
+                alert(response.data.message);
+                app.back();
+              }else{
+                alert(response.data.message);
+              }
+
             } else {
-              alert('Failed');
+              alert(response.data.message);
             }
           })
           .catch(function(response) {
-            alert('Break');
+            alert('Break ' + response.data.message);
           });
       //}
     },
@@ -107,7 +113,7 @@ export default {
           }
         })
         .catch(function(response) {
-          alert('Break');
+          alert('Break ');
         });
     },
     back() {
