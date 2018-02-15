@@ -5,16 +5,16 @@
     "homepage": "https://github.com/bantenprov/group-egovernment",
     "authors": [
         {
-        "name": "bantenprov",
-        "email": "developer.bantenprov@gmail.com",
-        "role": "developer"
-    }
+            "name": "bantenprov",
+            "email": "developer.bantenprov@gmail.com",
+            "role": "developer"
+        }
     ],
     "license": "MIT",
     "support": {
-      "source": "https://github.com/bantenprov/group-egovernment,",
-      "issues": "https://github.com/bantenprov/group-egovernment/issues",
-      "wiki": "https://github.com/bantenprov/group-egovernment/wiki"
+        "source": "https://github.com/bantenprov/group-egovernment,",
+        "issues": "https://github.com/bantenprov/group-egovernment/issues",
+        "wiki": "https://github.com/bantenprov/group-egovernment/wiki"
     },
     "require": {
         "php": ">=5.6.4",
