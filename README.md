@@ -100,12 +100,13 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
             meta: {
-                title: "Create Group Government"
+                title: "Add Group Government"
+            }
         },
         {
             path: '/admin/group-egovernment/:id',
             components: {
-                main: resolve => require(['./components/bantenprov/group-egovernment/view.vue'], resolve),
+                main: resolve => require(['./components/bantenprov/group-egovernment/show.vue'], resolve),
                 navbar: resolve => require(['./components/Navbar.vue'], resolve),
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
@@ -123,7 +124,7 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
             meta: {
                 title: "Edit Group Government"
             }
-        }
+        },
         //== ...
     ]
 },
