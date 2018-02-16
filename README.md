@@ -56,6 +56,12 @@ $ php artisan migrate
 $ php artisan vendor:publish --tag=group-egovernment-seeds
 ```
 
+Jika untuk update
+
+```bash
+$ php artisan vendor:publish --tag=group-egovernment-seeds --force
+```
+
 #### Lakukan Auto Dump :
 
 ```bash
@@ -72,6 +78,12 @@ $ php artisan db:seed --class=Bantenprov_GroupEgovernmentSeeder
 
 ```bash
 $ php artisan vendor:publish --tag=group-egovernment-assets
+```
+
+Jika untuk update
+
+```bash
+$ php artisan vendor:publish --tag=group-egovernment-assets --force
 ```
 
 #### Tambahkan route di dalam file : `resources/assets/js/routes.js` :
