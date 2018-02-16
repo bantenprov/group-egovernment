@@ -138,34 +138,30 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = GroupEgovernment::findOrFail($id);
 
-        if($request->get('old_label') == $request->get('label'))
+        if ($request->get('old_label') == $request->get('label'))
         {
             $validator = Validator::make($request->all(), [
                 'label' => 'required|max:16',
                 'description' => 'max:255',
             ]);
 
-        }else{
+        } else {
             $validator = Validator::make($request->all(), [
                 'label' => 'required|max:16|unique:group_egovernments,label',
                 'description' => 'max:255',
             ]);
         }
 
-
-        if($validator->fails()){
+        if ($validator->fails()){
             $response['message'] = 'Failed, label ' . $request->label . ' already exists';
-        }else{
+        } else {
             $response['message'] = 'success';
             $group_egovernment->label = $request->get('label');
             $group_egovernment->description = $request->get('description');
             $group_egovernment->save();
         }
 
-
-
         $response['status'] = true;
-
 
         return response()->json($response);
     }
@@ -189,4 +185,3 @@ class GroupEgovernmentController extends Controller
         return json_encode($response);
     }
 }
-
