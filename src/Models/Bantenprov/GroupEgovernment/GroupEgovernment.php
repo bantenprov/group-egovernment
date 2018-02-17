@@ -20,3 +20,4 @@ class GroupEgovernment extends Model
         'description',
     ];
 }
+

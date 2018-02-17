@@ -19,3 +19,4 @@ Route::group(['prefix' => 'api/group-egovernment', 'middleware' => ['web']], fun
     Route::put('/{id}',         $controllers->update)->name('group-egovernment.update');
     Route::delete('/{id}',      $controllers->destroy)->name('group-egovernment.destroy');
 });
+

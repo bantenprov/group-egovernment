@@ -1,6 +1,6 @@
 # Group E-Government
 
-4 Groups in Indonesian's E-Government
+4 Groups Indonesian's E-Government
 - G2G Goverment to Goverment
 - G2E Goverment to Employee
 - G2C Goverment to Citizen
@@ -10,7 +10,6 @@
 
 - Development snapshot
 ```bash
-
 $ composer require bantenprov/group-egovernment:dev-master
 ```
 - Latest release:
@@ -20,14 +19,14 @@ $ composer require bantenprov/group-egovernment
 ```
 
 ### Download via github
-
-```bash
+~~~
+bash
 $ git clone https://github.com/bantenprov/group-egovernment.git
-```
+~~~
 
 #### Edit `config/app.php` :
-
 ```php
+
 'providers' => [
 
     /*
@@ -56,12 +55,6 @@ $ php artisan migrate
 $ php artisan vendor:publish --tag=group-egovernment-seeds
 ```
 
-Jika untuk update
-
-```bash
-$ php artisan vendor:publish --tag=group-egovernment-seeds --force
-```
-
 #### Lakukan Auto Dump :
 
 ```bash
@@ -79,13 +72,6 @@ $ php artisan db:seed --class=Bantenprov_GroupEgovernmentSeeder
 ```bash
 $ php artisan vendor:publish --tag=group-egovernment-assets
 ```
-
-Jika untuk update
-
-```bash
-$ php artisan vendor:publish --tag=group-egovernment-assets --force
-```
-
 #### Tambahkan route di dalam file : `resources/assets/js/routes.js` :
 
 ```javascript
@@ -144,7 +130,6 @@ $ php artisan vendor:publish --tag=group-egovernment-assets --force
 },
 
 ```
-
 #### Edit menu `resources/assets/js/menu.js`
 
 ```javascript
