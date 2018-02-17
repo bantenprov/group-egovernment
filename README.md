@@ -73,7 +73,7 @@ $ php artisan db:seed --class=BantenprovGroupEgovernmentSeeder
 
 ```bash
 $ php artisan vendor:publish --tag=group-egovernment-assets
-$ php artisan vendor:publish --tag=budget-absorption-public
+$ php artisan vendor:publish --tag=group-egovernment-public
 ```
 #### Tambahkan route di dalam file : `resources/assets/js/routes.js` :
 
