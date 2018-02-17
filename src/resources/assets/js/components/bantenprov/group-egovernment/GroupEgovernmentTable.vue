@@ -9,7 +9,7 @@
                     <input type="search" id="search-input" class="form-control mb-2" placeholder="Search data" v-model="searchInput">
                 </label>
                 <div class="actions float-right pr-4 mb-3">
-                    <b-tooltip content="Tambah PDRB"><a class="btn btn-info pull-right" href="#/admin/budget-absorption/create">Create</a></b-tooltip>
+                    <b-tooltip content="Tambah PDRB"><a class="btn btn-info pull-right" href="#/admin/group-egovernment/create">Create</a></b-tooltip>
                 </div>
             </div>
         </div>
