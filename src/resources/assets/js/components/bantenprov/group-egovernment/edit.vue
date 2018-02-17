@@ -79,6 +79,9 @@ export default {
     onSubmit: function() {
       let app = this;
 
+      if (this.state.$invalid) {
+        return;
+      } else {
         axios.put('api/group-egovernment/' + this.$route.params.id, {
             label: this.model.label,
             description: this.model.description,
@@ -92,7 +95,6 @@ export default {
               }else{
                 alert(response.data.message);
               }
-
             } else {
               alert(response.data.message);
             }
@@ -100,7 +102,7 @@ export default {
           .catch(function(response) {
             alert('Break ' + response.data.message);
           });
-      //}
+      }
     },
     reset() {
       axios.get('api/group-egovernment/' + this.$route.params.id + '/edit')

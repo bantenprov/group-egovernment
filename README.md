@@ -9,9 +9,11 @@
 ### Install via composer
 
 - Development snapshot
+
 ```bash
 $ composer require bantenprov/group-egovernment:dev-master
 ```
+
 - Latest release:
 
 ```bash
@@ -19,14 +21,14 @@ $ composer require bantenprov/group-egovernment
 ```
 
 ### Download via github
-~~~
-bash
+
+```bash
 $ git clone https://github.com/bantenprov/group-egovernment.git
-~~~
+```
 
 #### Edit `config/app.php` :
-```php
 
+```php
 'providers' => [
 
     /*
@@ -64,7 +66,7 @@ $ composer dump-autoload
 #### Lakukan Seeding :
 
 ```bash
-$ php artisan db:seed --class=Bantenprov_GroupEgovernmentSeeder
+$ php artisan db:seed --class=BantenprovGroupEgovernmentSeeder
 ```
 
 #### Lakukan publish component vue :
@@ -128,7 +130,6 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
         //== ...
     ]
 },
-
 ```
 #### Edit menu `resources/assets/js/menu.js`
 
@@ -147,3 +148,4 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
         //== ...
     ]
 },
+```
