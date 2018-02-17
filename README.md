@@ -57,13 +57,13 @@ $ php artisan migrate
 $ php artisan vendor:publish --tag=group-egovernment-seeds
 ```
 
-#### Lakukan Auto Dump :
+#### Lakukan auto dump :
 
 ```bash
 $ composer dump-autoload
 ```
 
-#### Lakukan Seeding :
+#### Lakukan seeding :
 
 ```bash
 $ php artisan db:seed --class=BantenprovGroupEgovernmentSeeder
@@ -73,8 +73,32 @@ $ php artisan db:seed --class=BantenprovGroupEgovernmentSeeder
 
 ```bash
 $ php artisan vendor:publish --tag=group-egovernment-assets
+$ php artisan vendor:publish --tag=budget-absorption-public
 ```
 #### Tambahkan route di dalam file : `resources/assets/js/routes.js` :
+
+```javascript
+{
+    path: '/dashboard',
+    redirect: '/dashboard/home',
+    component: layout('Default'),
+    children: [
+        //== ...
+        {
+            path: '/group-egovernment',
+            components: {
+                main: resolve => require(['./components/views/bantenprov/group-egovernment/DashboardGroupEgovernment.vue'], resolve),
+                navbar: resolve => require(['./components/Navbar.vue'], resolve),
+                sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
+            },
+            meta: {
+                title: "Group Egovernment"
+            }
+        },
+        //== ...
+    ]
+},
+```
 
 ```javascript
 {
@@ -86,7 +110,7 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
         {
             path: '/admin/group-egovernment',
             components: {
-                main: resolve => require(['./components/bantenprov/group-egovernment/index.vue'], resolve),
+                main: resolve => require(['./components/bantenprov/group-egovernment/GroupEgovernment.index.vue'], resolve),
                 navbar: resolve => require(['./components/Navbar.vue'], resolve),
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
@@ -97,7 +121,7 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
         {
             path: '/admin/group-egovernment/create',
             components: {
-                main: resolve => require(['./components/bantenprov/group-egovernment/create.vue'], resolve),
+                main: resolve => require(['./components/bantenprov/group-egovernment/GroupEgovernment.add.vue'], resolve),
                 navbar: resolve => require(['./components/Navbar.vue'], resolve),
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
@@ -108,7 +132,7 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
         {
             path: '/admin/group-egovernment/:id',
             components: {
-                main: resolve => require(['./components/bantenprov/group-egovernment/show.vue'], resolve),
+                main: resolve => require(['./components/bantenprov/group-egovernment/GroupEgovernment.show.vue'], resolve),
                 navbar: resolve => require(['./components/Navbar.vue'], resolve),
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
@@ -119,7 +143,7 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
         {
             path: '/admin/group-egovernment/:id/edit',
             components: {
-                main: resolve => require(['./components/bantenprov/group-egovernment/edit.vue'], resolve),
+                main: resolve => require(['./components/bantenprov/group-egovernment/GroupEgovernment.edit.vue'], resolve),
                 navbar: resolve => require(['./components/Navbar.vue'], resolve),
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
@@ -141,11 +165,66 @@ $ php artisan vendor:publish --tag=group-egovernment-assets
     childItem: [
         //== ...
         {
-            name: 'Group Government',
+            name: 'Group Egovernment',
             link: '/admin/group-egovernment',
             icon: 'fa fa-angle-double-right'
         },
         //== ...
     ]
 },
+```
+
+```javascript
+{
+    name: 'Dashboard',
+    icon: 'fa fa-dashboard',
+    childType: 'collapse',
+    childItem: [
+        //== ...
+        {
+            name: 'Group Egovernment',
+            link: '/dashboard/group-egovernment',
+            icon: 'fa fa-angle-double-right'
+        },
+        //== ...
+    ]
+},
+```
+
+#### Tambahkan components `resources/assets/js/components.js` :
+
+```javascript
+import GroupEgovernment from './components/bantenprov/group-egovernment/GroupEgovernment.chart.vue';
+Vue.component('echarts-group-egovernment', GroupEgovernment);
+
+import GroupEgovernmentKota from './components/bantenprov/group-egovernment/GroupEgovernmentKota.chart.vue';
+Vue.component('echarts-group-egovernment-kota', GroupEgovernmentKota);
+
+import GroupEgovernmentTahun from './components/bantenprov/group-egovernment/GroupEgovernmentTahun.chart.vue';
+Vue.component('echarts-group-egovernment-tahun', GroupEgovernmentTahun);
+
+import GroupEgovernmentAdminShow from './components/bantenprov/group-egovernment/GroupEgovernmentAdmin.show.vue';
+Vue.component('admin-view-group-egovernment-tahun', GroupEgovernmentAdminShow);
+
+//== Echarts Angka Partisipasi Kasar
+
+import GroupEgovernmentBar01 from './components/views/bantenprov/group-egovernment/GroupEgovernmentBar01.vue';
+Vue.component('group-egovernment-bar-01', GroupEgovernmentBar01);
+
+import GroupEgovernmentBar02 from './components/views/bantenprov/group-egovernment/GroupEgovernmentBar02.vue';
+Vue.component('group-egovernment-bar-02', GroupEgovernmentBar02);
+
+//== mini bar charts
+import GroupEgovernmentBar03 from './components/views/bantenprov/group-egovernment/GroupEgovernmentBar03.vue';
+Vue.component('group-egovernment-bar-03', GroupEgovernmentBar03);
+
+import GroupEgovernmentPie01 from './components/views/bantenprov/group-egovernment/GroupEgovernmentPie01.vue';
+Vue.component('group-egovernment-pie-01', GroupEgovernmentPie01);
+
+import GroupEgovernmentPie02 from './components/views/bantenprov/group-egovernment/GroupEgovernmentPie02.vue';
+Vue.component('group-egovernment-pie-02', GroupEgovernmentPie02);
+
+//== mini pie charts
+import GroupEgovernmentPie03 from './components/views/bantenprov/group-egovernment/GroupEgovernmentPie03.vue';
+Vue.component('group-egovernment-pie-03', GroupEgovernmentPie03);
 ```
