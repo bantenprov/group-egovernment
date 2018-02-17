@@ -42,7 +42,6 @@ $ git clone https://github.com/bantenprov/group-egovernment.git
     Illuminate\Cookie\CookieServiceProvider::class,
     //....
     Bantenprov\GroupEgovernment\GroupEgovernmentServiceProvider::class,
-
 ```
 
 #### Lakukan migrate :
