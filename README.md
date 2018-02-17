@@ -85,7 +85,7 @@ $ php artisan vendor:publish --tag=group-egovernment-public
     children: [
         //== ...
         {
-            path: '/group-egovernment',
+            path: '/dashboard/group-egovernment',
             components: {
                 main: resolve => require(['./components/views/bantenprov/group-egovernment/DashboardGroupEgovernment.vue'], resolve),
                 navbar: resolve => require(['./components/Navbar.vue'], resolve),
