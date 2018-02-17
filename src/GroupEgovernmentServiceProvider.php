@@ -1,4 +1,6 @@
-<?php namespace Bantenprov\GroupEgovernment;
+<?php
+
+namespace Bantenprov\GroupEgovernment;
 
 use Illuminate\Support\ServiceProvider;
 use Bantenprov\GroupEgovernment\Console\Commands\GroupEgovernmentCommand;

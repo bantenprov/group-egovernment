@@ -81,29 +81,14 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = new GroupEgovernment;
 
-        $validator = Validator::make($request->all(), [
-            'label' => 'required|max:16|unique:group_egovernments,label',
+        $this->validate($request, [
+            'label' => 'required|max:16',
             'description' => 'max:255',
         ]);
 
-        if($validator->fails()){
-            $check = $group_egovernment->where('label',$request->label)->whereNull('deleted_at')->count();
-            if($check > 0){
-                $response['message'] = 'Failed, label ' . $request->label . ' already exists';
-            }else{
-                $response['message'] = 'success';
-                $group_egovernment->label = $request->get('label');
-                $group_egovernment->description = $request->get('description');
-                $group_egovernment->save();
-            }
-        }else{
-            $response['message'] = 'success';
-            $group_egovernment->label = $request->get('label');
-            $group_egovernment->description = $request->get('description');
-            $group_egovernment->save();
-        }
-
-
+        $group_egovernment->label = $request->get('label');
+        $group_egovernment->description = $request->get('description');
+        $group_egovernment->save();
 
         $response['status'] = true;
 
@@ -153,44 +138,30 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = GroupEgovernment::findOrFail($id);
 
-        if($request->get('old_label') == $request->get('label'))
+        if ($request->get('old_label') == $request->get('label'))
         {
             $validator = Validator::make($request->all(), [
                 'label' => 'required|max:16',
                 'description' => 'max:255',
             ]);
 
-        }else{
+        } else {
             $validator = Validator::make($request->all(), [
                 'label' => 'required|max:16|unique:group_egovernments,label',
                 'description' => 'max:255',
             ]);
         }
 
-
-
-
-        if($validator->fails()){
-            $check = $group_egovernment->where('label',$request->label)->whereNull('deleted_at')->count();
-            if($check > 0){
-                $response['message'] = 'Failed, label ' . $request->label . ' already exists';
-            }else{
-                $response['message'] = 'success';
-                $group_egovernment->label = $request->get('label');
-                $group_egovernment->description = $request->get('description');
-                $group_egovernment->save();
-            }
-        }else{
+        if ($validator->fails()){
+            $response['message'] = 'Failed, label ' . $request->label . ' already exists';
+        } else {
             $response['message'] = 'success';
             $group_egovernment->label = $request->get('label');
             $group_egovernment->description = $request->get('description');
             $group_egovernment->save();
         }
 
-
-
         $response['status'] = true;
-
 
         return response()->json($response);
     }
@@ -214,4 +185,3 @@ class GroupEgovernmentController extends Controller
         return json_encode($response);
     }
 }
-
