@@ -159,14 +159,14 @@ $ php artisan vendor:publish --tag=group-egovernment-public
 
 ```javascript
 {
-    name: 'Admin',
-    icon: 'fa fa-lock',
+    name: 'Dashboard',
+    icon: 'fa fa-dashboard',
     childType: 'collapse',
     childItem: [
         //== ...
         {
             name: 'Group Egovernment',
-            link: '/admin/group-egovernment',
+            link: '/dashboard/group-egovernment',
             icon: 'fa fa-angle-double-right'
         },
         //== ...
@@ -176,14 +176,14 @@ $ php artisan vendor:publish --tag=group-egovernment-public
 
 ```javascript
 {
-    name: 'Dashboard',
-    icon: 'fa fa-dashboard',
+    name: 'Admin',
+    icon: 'fa fa-lock',
     childType: 'collapse',
     childItem: [
         //== ...
         {
             name: 'Group Egovernment',
-            link: '/dashboard/group-egovernment',
+            link: '/admin/group-egovernment',
             icon: 'fa fa-angle-double-right'
         },
         //== ...
