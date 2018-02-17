@@ -65,20 +65,24 @@ export default {
       if (this.state.$invalid) {
         return;
       } else {
-
         axios.post('api/group-egovernment', {
             label: this.model.label,
             description: this.model.description
           })
           .then(response => {
             if (response.data.status == true) {
-              app.back();
+              if(response.data.message == 'success'){
+                alert(response.data.message);
+                app.back();
+              }else{
+                alert(response.data.message);
+              }
             } else {
-              alert('Failed');
+              alert(response.data.message);
             }
           })
           .catch(function(response) {
-            alert('Break');
+            alert('Break ' + response.data.message);
           });
       }
     },
