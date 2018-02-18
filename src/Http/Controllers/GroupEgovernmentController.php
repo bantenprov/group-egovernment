@@ -5,9 +5,10 @@ namespace Bantenprov\GroupEgovernment\Http\Controllers;
 /* Require */
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Bantenprov\BudgetAbsorption\Facades\GroupEgovernment;
 
 /* Models */
-use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment;
+use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernmentModel;
 
 /* Etc */
 use Validator;
@@ -40,9 +41,9 @@ class GroupEgovernmentController extends Controller
         if (request()->has('sort')) {
             list($sortCol, $sortDir) = explode('|', request()->sort);
 
-            $query = GroupEgovernment::orderBy($sortCol, $sortDir);
+            $query = GroupEgovernmentModel::orderBy($sortCol, $sortDir);
         } else {
-            $query = GroupEgovernment::orderBy('id', 'asc');
+            $query = GroupEgovernmentModel::orderBy('id', 'asc');
         }
 
         if ($request->exists('filter')) {
@@ -68,7 +69,7 @@ class GroupEgovernmentController extends Controller
      */
     public function create()
     {
-        $group_egovernment = new GroupEgovernment;
+        $group_egovernment = new GroupEgovernmentModel;
 
         $response['group_egovernment'] = $group_egovernment;
         $response['status'] = true;
@@ -84,7 +85,7 @@ class GroupEgovernmentController extends Controller
      */
     public function store(Request $request)
     {
-        $group_egovernment = new GroupEgovernment;
+        $group_egovernment = new GroupEgovernmentModel;
 
         $validator = Validator::make($request->all(), [
             'label' => 'required|max:16|unique:group_egovernments,label',
@@ -124,7 +125,7 @@ class GroupEgovernmentController extends Controller
      */
     public function show($id)
     {
-        $group_egovernment = GroupEgovernment::findOrFail($id);
+        $group_egovernment = GroupEgovernmentModel::findOrFail($id);
 
         $response['group_egovernment'] = $group_egovernment;
         $response['status'] = true;
@@ -140,7 +141,7 @@ class GroupEgovernmentController extends Controller
      */
     public function edit($id)
     {
-        $group_egovernment = GroupEgovernment::findOrFail($id);
+        $group_egovernment = GroupEgovernmentModel::findOrFail($id);
 
         $response['group_egovernment'] = $group_egovernment;
         $response['status'] = true;
@@ -157,7 +158,7 @@ class GroupEgovernmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $group_egovernment = GroupEgovernment::findOrFail($id);
+        $group_egovernment = GroupEgovernmentModel::findOrFail($id);
 
         if ($request->get('old_label') == $request->get('label'))
         {
@@ -205,7 +206,7 @@ class GroupEgovernmentController extends Controller
      */
     public function destroy($id)
     {
-        $group_egovernment = GroupEgovernment::findOrFail($id);
+        $group_egovernment = GroupEgovernmentModel::findOrFail($id);
 
         if ($group_egovernment->delete()) {
             $response['status'] = true;
