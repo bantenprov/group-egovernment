@@ -24,31 +24,33 @@
         </div>
       </div>
 
-      <vuetable ref="vuetable"
-        api-url="/api/group-egovernment"
-        :fields="fields"
-        :sort-order="sortOrder"
-        :css="css.table"
-        pagination-path=""
-        :per-page="5"
-        :append-params="moreParams"
-        @vuetable:pagination-data="onPaginationData"
-        @vuetable:loading="onLoading"
-        @vuetable:loaded="onLoaded">
-        <template slot="actions" slot-scope="props">
-          <div class="btn-group pull-right" role="group" style="display:flex;">
-            <!--<button class="btn btn-info btn-sm" role="button" @click="viewRow(props.rowData)">
-              <span class="fa fa-eye"></span>
-            </button>-->
-            <button class="btn btn-warning btn-sm" role="button" @click="editRow(props.rowData)">
-              <span class="fa fa-pencil"></span>
-            </button>
-            <button class="btn btn-danger btn-sm" role="button" @click="deleteRow(props.rowData)">
-              <span class="fa fa-trash"></span>
-            </button>
-          </div>
-        </template>
-      </vuetable>
+      <div class="table-responsive">
+        <vuetable ref="vuetable"
+          api-url="/api/group-egovernment"
+          :fields="fields"
+          :sort-order="sortOrder"
+          :css="css.table"
+          pagination-path=""
+          :per-page="5"
+          :append-params="moreParams"
+          @vuetable:pagination-data="onPaginationData"
+          @vuetable:loading="onLoading"
+          @vuetable:loaded="onLoaded">
+          <template slot="actions" slot-scope="props">
+            <div class="btn-group pull-right" role="group" style="display:flex;">
+              <!--<button class="btn btn-info btn-sm" role="button" @click="viewRow(props.rowData)">
+                <span class="fa fa-eye"></span>
+              </button>-->
+              <button class="btn btn-warning btn-sm" role="button" @click="editRow(props.rowData)">
+                <span class="fa fa-pencil"></span>
+              </button>
+              <button class="btn btn-danger btn-sm" role="button" @click="deleteRow(props.rowData)">
+                <span class="fa fa-trash"></span>
+              </button>
+            </div>
+          </template>
+        </vuetable>
+      </div>
 
       <div class="d-flex justify-content-between align-items-center">
         <vuetable-pagination-info ref="paginationInfo"
@@ -149,7 +151,7 @@ export default {
       let app = this;
 
       if (confirm('Do you really want to delete it?')) {
-        axios.delete('/api/group-egovernment/' + rowData.id) 
+        axios.delete('/api/group-egovernment/' + rowData.id)
           .then(function(response) {
             if (response.data.status == true) {
               app.$refs.vuetable.reload()
