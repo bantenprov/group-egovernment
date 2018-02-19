@@ -69,16 +69,6 @@ class GroupEgovernmentServiceProvider extends ServiceProvider
     }
 
     /**
-     * Loading package routes
-     *
-     * @return void
-     */
-    protected function routeHandle()
-    {
-        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
-    }
-
-    /**
      * Loading and publishing package's config
      *
      * @return void
@@ -92,7 +82,17 @@ class GroupEgovernmentServiceProvider extends ServiceProvider
 
         $this->publishes([
             $packageConfigPath => $appConfigPath,
-        ], 'config');
+        ], 'group-egovernment-config');
+    }
+
+    /**
+     * Loading package routes
+     *
+     * @return void
+     */
+    protected function routeHandle()
+    {
+        $this->loadRoutesFrom(__DIR__.'/routes/routes.php');
     }
 
     /**
@@ -108,7 +108,7 @@ class GroupEgovernmentServiceProvider extends ServiceProvider
 
         $this->publishes([
             $packageTranslationsPath => resource_path('lang/vendor/group-egovernment'),
-        ], 'lang');
+        ], 'group-egovernment-lang');
     }
 
     /**
@@ -124,7 +124,7 @@ class GroupEgovernmentServiceProvider extends ServiceProvider
 
         $this->publishes([
             $packageViewsPath => resource_path('views/vendor/group-egovernment'),
-        ], 'views');
+        ], 'group-egovernment-views');
     }
 
     /**
