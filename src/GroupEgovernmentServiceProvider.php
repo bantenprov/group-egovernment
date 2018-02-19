@@ -1,4 +1,6 @@
-<?php namespace Bantenprov\GroupEgovernment;
+<?php
+
+namespace Bantenprov\GroupEgovernment;
 
 use Illuminate\Support\ServiceProvider;
 use Bantenprov\GroupEgovernment\Console\Commands\GroupEgovernmentCommand;
@@ -11,7 +13,6 @@ use Bantenprov\GroupEgovernment\Console\Commands\GroupEgovernmentCommand;
  */
 class GroupEgovernmentServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -26,7 +27,6 @@ class GroupEgovernmentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Bootstrap handles
         $this->routeHandle();
         $this->configHandle();
         $this->langHandle();

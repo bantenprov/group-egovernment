@@ -1,4 +1,6 @@
-<?php namespace Bantenprov\GroupEgovernment;
+<?php
+
+namespace Bantenprov\GroupEgovernment;
 
 /**
  * The GroupEgovernment class.

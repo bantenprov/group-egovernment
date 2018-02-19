@@ -173,13 +173,9 @@ export default {
     },
     onLoading: function() {
       this.loading = true;
-
-      // console.log('Loading: ' + this.loading);
     },
     onLoaded: function() {
-      this.loading = false;
-
-      // console.log('Loading: ' + this.loading);
+      this.loading = true;
     }
   },
   events: {
@@ -191,7 +187,9 @@ export default {
       Vue.nextTick(() => this.$refs.vuetable.refresh())
     },
     'filter-reset'() {
-      this.moreParams = {}
+      this.moreParams = {
+        //
+      }
 
       Vue.nextTick(() => this.$refs.vuetable.refresh())
     }
