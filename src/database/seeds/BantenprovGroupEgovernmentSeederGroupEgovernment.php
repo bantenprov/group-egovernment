@@ -1,8 +1,11 @@
 <?php
 
-use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment;
+/* Require */
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+
+/* Models */
+use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment;
 
 class BantenprovGroupEgovernmentSeederGroupEgovernment extends Seeder
 {

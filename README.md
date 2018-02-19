@@ -1,6 +1,6 @@
 # Group E-Government
 
-4 Groups Indonesian's E-Government
+4 Groups in Indonesian's E-Government
 - G2G Goverment to Goverment
 - G2E Goverment to Employee
 - G2C Goverment to Citizen
@@ -42,7 +42,6 @@ $ git clone https://github.com/bantenprov/group-egovernment.git
     Illuminate\Cookie\CookieServiceProvider::class,
     //....
     Bantenprov\GroupEgovernment\GroupEgovernmentServiceProvider::class,
-
 ```
 
 #### Lakukan migrate :
