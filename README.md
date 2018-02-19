@@ -1,5 +1,9 @@
 # Group E-Government
 
+[![Join the chat at https://gitter.im/group-egovernmentn/Lobby](https://badges.gitter.im/group-egovernmentn/Lobby.svg)](https://gitter.im/group-egovernmentn/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bantenprov/group-egovernmentn/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bantenprov/group-egovernmentn/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/bantenprov/group-egovernmentn/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bantenprov/group-egovernmentn/build-status/master)
+
 4 Groups Indonesian's E-Government
 - G2G Goverment to Goverment
 - G2E Goverment to Employee
