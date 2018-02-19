@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * @package Bantenprov\GroupEgovernment
  * @author  bantenprov <developer.bantenprov@gmail.com>
  */
-class GroupEgovernment extends Facade
+class GroupEgovernmentFacade extends Facade
 {
     /**
      * Get the registered name of the component.

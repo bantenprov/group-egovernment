@@ -5,10 +5,10 @@ namespace Bantenprov\GroupEgovernment\Http\Controllers;
 /* Require */
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Bantenprov\BudgetAbsorption\Facades\GroupEgovernment;
+use Bantenprov\BudgetAbsorption\Facades\GroupEgovernmentFacade;
 
 /* Models */
-use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment as GroupEgovernmentModel;
+use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment;
 
 /* Etc */
 use Validator;
@@ -26,7 +26,7 @@ class GroupEgovernmentController extends Controller
      *
      * @return void
      */
-    public function __construct(GroupEgovernmentModel $group_egovernment)
+    public function __construct(GroupEgovernment $group_egovernment)
     {
         $this->group_egovernment = $group_egovernment;
     }
