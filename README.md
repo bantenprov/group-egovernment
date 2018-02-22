@@ -1,5 +1,14 @@
 # Group E-Government
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/build-status/master)
+[![Latest Stable Version](https://poser.pugx.org/bantenprov/group-egovernment/v/stable)](https://packagist.org/packages/bantenprov/group-egovernment)
+[![Total Downloads](https://poser.pugx.org/bantenprov/group-egovernment/downloads)](https://packagist.org/packages/bantenprov/group-egovernment)
+[![Latest Unstable Version](https://poser.pugx.org/bantenprov/group-egovernment/v/unstable)](https://packagist.org/packages/bantenprov/group-egovernment)
+[![License](https://poser.pugx.org/bantenprov/group-egovernment/license)](https://packagist.org/packages/bantenprov/group-egovernment)
+[![Monthly Downloads](https://poser.pugx.org/bantenprov/group-egovernment/d/monthly)](https://packagist.org/packages/bantenprov/group-egovernment)
+[![Daily Downloads](https://poser.pugx.org/bantenprov/group-egovernment/d/daily)](https://packagist.org/packages/bantenprov/group-egovernment)
+
 4 Groups in Indonesian's E-Government
 - G2G Goverment to Goverment
 - G2E Goverment to Employee
