@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-table" aria-hidden="true"></i> Add Group Government
+      <i class="fa fa-table" aria-hidden="true"></i> Add Group Egovernment
 
       <ul class="nav nav-pills card-header-pills pull-right">
         <li class="nav-item">
