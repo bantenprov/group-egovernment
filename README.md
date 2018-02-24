@@ -54,10 +54,12 @@ $ git clone https://github.com/bantenprov/group-egovernment.git
 $ php artisan migrate
 ```
 
-#### Publish database seeder :
+#### Publish vendor :
 
 ```bash
 $ php artisan vendor:publish --tag=group-egovernment-seeds
+$ php artisan vendor:publish --tag=group-egovernment-assets
+$ php artisan vendor:publish --tag=group-egovernment-public
 ```
 
 #### Lakukan auto dump :
@@ -72,12 +74,6 @@ $ composer dump-autoload
 $ php artisan db:seed --class=BantenprovGroupEgovernmentSeeder
 ```
 
-#### Lakukan publish component vue :
-
-```bash
-$ php artisan vendor:publish --tag=group-egovernment-assets
-$ php artisan vendor:publish --tag=group-egovernment-public
-```
 #### Tambahkan route di dalam file : `resources/assets/js/routes.js` :
 
 ```javascript
