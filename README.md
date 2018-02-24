@@ -48,12 +48,6 @@ $ git clone https://github.com/bantenprov/group-egovernment.git
     Bantenprov\GroupEgovernment\GroupEgovernmentServiceProvider::class,
 ```
 
-#### Lakukan migrate :
-
-```bash
-$ php artisan migrate
-```
-
 #### Publish vendor :
 
 ```bash
@@ -66,6 +60,12 @@ $ php artisan vendor:publish --tag=group-egovernment-public
 
 ```bash
 $ composer dump-autoload
+```
+
+#### Lakukan migrate :
+
+```bash
+$ php artisan migrate
 ```
 
 #### Lakukan seeding :
