@@ -38,8 +38,8 @@ class GroupEgovernmentController extends Controller
      */
     public function index(Request $request)
     {
-        if (request()->has('sort')) {
-            list($sortCol, $sortDir) = explode('|', request()->sort);
+        if ($request->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', $request->sort);
 
             $query = $this->group_egovernment->orderBy($sortCol, $sortDir);
         } else {
@@ -54,7 +54,7 @@ class GroupEgovernmentController extends Controller
             });
         }
 
-        $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        $perPage = $request->has('per_page') ? (int) $request->per_page : null;
         $response = $query->paginate($perPage);
 
         return response()->json($response)
@@ -98,15 +98,15 @@ class GroupEgovernmentController extends Controller
             if ($check > 0) {
                 $response['message'] = 'Failed, label ' . $request->label . ' already exists';
             } else {
-                $group_egovernment->label = $request->input('label');
-                $group_egovernment->description = $request->input('description');
+                $group_egovernment->label = $request->label;
+                $group_egovernment->description = $request->description;
                 $group_egovernment->save();
 
                 $response['message'] = 'success';
             }
         } else {
-            $group_egovernment->label = $request->input('label');
-            $group_egovernment->description = $request->input('description');
+            $group_egovernment->label = $request->label;
+            $group_egovernment->description = $request->description;
             $group_egovernment->save();
 
             $response['message'] = 'success';
@@ -160,7 +160,7 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
-        if ($request->input('old_label') == $request->input('label'))
+        if ($request->old_label == $request->label)
         {
             $validator = Validator::make($request->all(), [
                 'label' => 'required|max:16',
@@ -179,15 +179,15 @@ class GroupEgovernmentController extends Controller
             if ($check > 0) {
                 $response['message'] = 'Failed, label ' . $request->label . ' already exists';
             } else {
-                $group_egovernment->label = $request->input('label');
-                $group_egovernment->description = $request->input('description');
+                $group_egovernment->label = $request->label;
+                $group_egovernment->description = $request->description;
                 $group_egovernment->save();
 
                 $response['message'] = 'success';
             }
         } else {
-            $group_egovernment->label = $request->input('label');
-            $group_egovernment->description = $request->input('description');
+            $group_egovernment->label = $request->label;
+            $group_egovernment->description = $request->description;
             $group_egovernment->save();
 
             $response['message'] = 'success';
