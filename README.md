@@ -1,5 +1,6 @@
 # Group Egovernment
 
+[![Join the chat at https://gitter.im/group-egovernment/Lobby](https://badges.gitter.im/group-egovernment/Lobby.svg)](https://gitter.im/group-egovernment/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/build-status/master)
 [![Latest Stable Version](https://poser.pugx.org/bantenprov/group-egovernment/v/stable)](https://packagist.org/packages/bantenprov/group-egovernment)
