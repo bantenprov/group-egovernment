@@ -70,11 +70,14 @@ class GroupEgovernmentController extends Controller
     public function create()
     {
         $group_egovernment = $this->group_egovernment;
+        $group_egovernment->id = null;
+        $group_egovernment->label = null;
+        $group_egovernment->description = null;
 
         $response['group_egovernment'] = $group_egovernment;
         $response['status'] = true;
 
-        return response()->json($group_egovernment);
+        return response()->json($response);
     }
 
     /**
