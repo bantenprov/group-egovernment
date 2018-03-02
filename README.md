@@ -214,7 +214,7 @@ Vue.component('echarts-group-egovernment-tahun', GroupEgovernmentTahun);
 import GroupEgovernmentAdminShow from './components/bantenprov/group-egovernment/GroupEgovernmentAdmin.show.vue';
 Vue.component('admin-view-group-egovernment-tahun', GroupEgovernmentAdminShow);
 
-//== Echarts Angka Partisipasi Kasar
+//== Echarts Group Egoverment
 
 import GroupEgovernmentBar01 from './components/views/bantenprov/group-egovernment/GroupEgovernmentBar01.vue';
 Vue.component('group-egovernment-bar-01', GroupEgovernmentBar01);
