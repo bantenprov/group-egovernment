@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-table" aria-hidden="true"></i> Edit Group Egovernment
+      <i class="fa fa-table" aria-hidden="true"></i> {{ title }}
 
       <ul class="nav nav-pills card-header-pills pull-right">
         <li class="nav-item">
@@ -50,6 +50,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      state: {},
+      title : "Edit Group Egovernment",
+      model: {
+        label: "",
+        description: ""
+      }
+    }
+  },
   mounted() {
     axios.get('api/group-egovernment/' + this.$route.params.id + '/edit')
       .then(response => {
@@ -65,15 +75,6 @@ export default {
         alert('Break');
         window.location.href = '#/admin/group-egovernment';
       });
-  },
-  data() {
-    return {
-      state: {},
-      model: {
-        label: "",
-        description: ""
-      }
-    }
   },
   methods: {
     onSubmit: function() {

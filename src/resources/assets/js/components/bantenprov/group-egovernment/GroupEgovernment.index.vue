@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-table" aria-hidden="true"></i> Group Egovernment
+      <i class="fa fa-table" aria-hidden="true"></i> {{ title }}
 
       <ul class="nav nav-pills card-header-pills pull-right">
         <li class="nav-item">
@@ -82,6 +82,7 @@ export default {
   },
   data() {
     return {
+      title : "Group Egovernment",
       loading: true,
       fields: [
         {

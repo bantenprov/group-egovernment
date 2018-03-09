@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-table" aria-hidden="true"></i> Add Group Egovernment
+      <i class="fa fa-table" aria-hidden="true"></i> {{ title }}
 
       <ul class="nav nav-pills card-header-pills pull-right">
         <li class="nav-item">
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       state: {},
+      title : "Add Group Egovernment",
       model: {
         label: "",
         description: ""
