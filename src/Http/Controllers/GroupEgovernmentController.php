@@ -75,7 +75,7 @@ class GroupEgovernmentController extends Controller
         $group_egovernment->description = null;
 
         $response['group_egovernment'] = $group_egovernment;
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -115,7 +115,7 @@ class GroupEgovernmentController extends Controller
             $response['message'] = 'success';
         }
 
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -131,7 +131,7 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
         $response['group_egovernment'] = $group_egovernment;
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -147,7 +147,7 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
         $response['group_egovernment'] = $group_egovernment;
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -196,7 +196,7 @@ class GroupEgovernmentController extends Controller
             $response['message'] = 'success';
         }
 
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -212,9 +212,9 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
         if ($group_egovernment->delete()) {
-            $response['status'] = true;
+            $response['loaded'] = true;
         } else {
-            $response['status'] = false;
+            $response['loaded'] = false;
         }
 
         return json_encode($response);

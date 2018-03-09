@@ -63,7 +63,7 @@ export default {
   mounted() {
     axios.get('api/group-egovernment/' + this.$route.params.id + '/edit')
       .then(response => {
-        if (response.data.status == true) {
+        if (response.data.loaded == true) {
           this.model.label = response.data.group_egovernment.label;
           this.model.old_label = response.data.group_egovernment.label;
           this.model.description = response.data.group_egovernment.description;
@@ -89,7 +89,7 @@ export default {
             old_label: this.model.old_label
           })
           .then(response => {
-            if (response.data.status == true) {
+            if (response.data.loaded == true) {
               if(response.data.message == 'success'){
                 alert(response.data.message);
                 app.back();
@@ -108,7 +108,7 @@ export default {
     reset() {
       axios.get('api/group-egovernment/' + this.$route.params.id + '/edit')
         .then(response => {
-          if (response.data.status == true) {
+          if (response.data.loaded == true) {
             this.model.label = response.data.group_egovernment.label;
             this.model.description = response.data.group_egovernment.description;
           } else {
