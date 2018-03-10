@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <i class="fa fa-table" aria-hidden="true"></i> Group Government
+      <i class="fa fa-table" aria-hidden="true"></i> {{ title }}
 
       <ul class="nav nav-pills card-header-pills pull-right">
         <li class="nav-item">
@@ -53,8 +53,7 @@
       </div>
 
       <div class="d-flex justify-content-between align-items-center">
-        <vuetable-pagination-info ref="paginationInfo"
-        ></vuetable-pagination-info>
+        <vuetable-pagination-info ref="paginationInfo"></vuetable-pagination-info>
         <vuetable-pagination ref="pagination"
           :css="css.pagination"
           @vuetable-pagination:change-page="onChangePage">
@@ -83,6 +82,7 @@ export default {
   },
   data() {
     return {
+      title: 'Group Egovernment',
       loading: true,
       fields: [
         {
@@ -153,7 +153,7 @@ export default {
       if (confirm('Do you really want to delete it?')) {
         axios.delete('/api/group-egovernment/' + rowData.id)
           .then(function(response) {
-            if (response.data.status == true) {
+            if (response.data.loaded == true) {
               app.$refs.vuetable.reload()
             } else {
               alert('Failed');

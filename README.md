@@ -1,5 +1,6 @@
-# Group E-Government
+# Group Egovernment
 
+[![Join the chat at https://gitter.im/group-egovernment/Lobby](https://badges.gitter.im/group-egovernment/Lobby.svg)](https://gitter.im/group-egovernment/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bantenprov/group-egovernment/build-status/master)
 [![Latest Stable Version](https://poser.pugx.org/bantenprov/group-egovernment/v/stable)](https://packagist.org/packages/bantenprov/group-egovernment)
@@ -9,7 +10,7 @@
 [![Monthly Downloads](https://poser.pugx.org/bantenprov/group-egovernment/d/monthly)](https://packagist.org/packages/bantenprov/group-egovernment)
 [![Daily Downloads](https://poser.pugx.org/bantenprov/group-egovernment/d/daily)](https://packagist.org/packages/bantenprov/group-egovernment)
 
-4 Groups in Indonesian's E-Government
+4 Groups in Indonesian's Egovernment
 - G2G Goverment to Goverment
 - G2E Goverment to Employee
 - G2C Goverment to Citizen
@@ -41,28 +42,19 @@ $ git clone https://github.com/bantenprov/group-egovernment.git
 'providers' => [
 
     /*
-    * Laravel Framework Service Providers...
-    */
-    Illuminate\Auth\AuthServiceProvider::class,
-    Illuminate\Broadcasting\BroadcastServiceProvider::class,
-    Illuminate\Bus\BusServiceProvider::class,
-    Illuminate\Cache\CacheServiceProvider::class,
-    Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
-    Illuminate\Cookie\CookieServiceProvider::class,
+     * Package Service Providers...
+     */
+    Laravel\Tinker\TinkerServiceProvider::class,
     //....
     Bantenprov\GroupEgovernment\GroupEgovernmentServiceProvider::class,
 ```
 
-#### Lakukan migrate :
-
-```bash
-$ php artisan migrate
-```
-
-#### Publish database seeder :
+#### Publish vendor :
 
 ```bash
 $ php artisan vendor:publish --tag=group-egovernment-seeds
+$ php artisan vendor:publish --tag=group-egovernment-assets
+$ php artisan vendor:publish --tag=group-egovernment-public
 ```
 
 #### Lakukan auto dump :
@@ -71,18 +63,18 @@ $ php artisan vendor:publish --tag=group-egovernment-seeds
 $ composer dump-autoload
 ```
 
+#### Lakukan migrate :
+
+```bash
+$ php artisan migrate
+```
+
 #### Lakukan seeding :
 
 ```bash
 $ php artisan db:seed --class=BantenprovGroupEgovernmentSeeder
 ```
 
-#### Lakukan publish component vue :
-
-```bash
-$ php artisan vendor:publish --tag=group-egovernment-assets
-$ php artisan vendor:publish --tag=group-egovernment-public
-```
 #### Tambahkan route di dalam file : `resources/assets/js/routes.js` :
 
 ```javascript
@@ -123,7 +115,7 @@ $ php artisan vendor:publish --tag=group-egovernment-public
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
             meta: {
-                title: "Group Government"
+                title: "Group Egovernment"
             }
         },
         {
@@ -134,7 +126,7 @@ $ php artisan vendor:publish --tag=group-egovernment-public
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
             meta: {
-                title: "Add Group Government"
+                title: "Add Group Egovernment"
             }
         },
         {
@@ -145,7 +137,7 @@ $ php artisan vendor:publish --tag=group-egovernment-public
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
             meta: {
-                title: "View Group Government"
+                title: "View Group Egovernment"
             }
         },
         {
@@ -156,7 +148,7 @@ $ php artisan vendor:publish --tag=group-egovernment-public
                 sidebar: resolve => require(['./components/Sidebar.vue'], resolve)
             },
             meta: {
-                title: "Edit Group Government"
+                title: "Edit Group Egovernment"
             }
         },
         //== ...

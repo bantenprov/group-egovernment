@@ -5,7 +5,7 @@ namespace Bantenprov\GroupEgovernment\Http\Controllers;
 /* Require */
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Bantenprov\BudgetAbsorption\Facades\GroupEgovernmentFacade;
+use Bantenprov\GroupEgovernment\Facades\GroupEgovernmentFacade;
 
 /* Models */
 use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment;
@@ -38,8 +38,8 @@ class GroupEgovernmentController extends Controller
      */
     public function index(Request $request)
     {
-        if (request()->has('sort')) {
-            list($sortCol, $sortDir) = explode('|', request()->sort);
+        if ($request->has('sort')) {
+            list($sortCol, $sortDir) = explode('|', $request->sort);
 
             $query = $this->group_egovernment->orderBy($sortCol, $sortDir);
         } else {
@@ -54,7 +54,7 @@ class GroupEgovernmentController extends Controller
             });
         }
 
-        $perPage = request()->has('per_page') ? (int) request()->per_page : null;
+        $perPage = $request->has('per_page') ? (int) $request->per_page : null;
         $response = $query->paginate($perPage);
 
         return response()->json($response)
@@ -69,12 +69,15 @@ class GroupEgovernmentController extends Controller
      */
     public function create()
     {
-        $group_egovernment = $this->group_egovernment;
+        $group_egovernment              = $this->group_egovernment;
+        $group_egovernment->id          = null;
+        $group_egovernment->label       = null;
+        $group_egovernment->description = null;
 
         $response['group_egovernment'] = $group_egovernment;
-        $response['status'] = true;
+        $response['loaded'] = true;
 
-        return response()->json($group_egovernment);
+        return response()->json($response);
     }
 
     /**
@@ -88,31 +91,23 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment;
 
         $validator = Validator::make($request->all(), [
-            'label' => 'required|max:16|unique:group_egovernments,label',
-            'description' => 'max:255',
+            'label'         => 'required|max:16|unique:group_egovernments,label,NULL,id,deleted_at,NULL',
+            'description'   => 'required|max:255',
         ]);
 
         if($validator->fails()){
-            $check = $group_egovernment->where('label',$request->label)->whereNull('deleted_at')->count();
-
-            if ($check > 0) {
-                $response['message'] = 'Failed, label ' . $request->label . ' already exists';
-            } else {
-                $group_egovernment->label = $request->input('label');
-                $group_egovernment->description = $request->input('description');
-                $group_egovernment->save();
-
-                $response['message'] = 'success';
-            }
+            $response['error']  = true;
+            $response['message'] = $validator->errors()->first();
         } else {
-            $group_egovernment->label = $request->input('label');
-            $group_egovernment->description = $request->input('description');
+            $group_egovernment->label       = $request->label;
+            $group_egovernment->description = $request->description;
             $group_egovernment->save();
 
-            $response['message'] = 'success';
+            $response['error'] = false;
+            $response['message'] = 'Success';
         }
 
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -128,7 +123,7 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
         $response['group_egovernment'] = $group_egovernment;
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -144,7 +139,7 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
         $response['group_egovernment'] = $group_egovernment;
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -160,40 +155,24 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
-        if ($request->input('old_label') == $request->input('label'))
-        {
-            $validator = Validator::make($request->all(), [
-                'label' => 'required|max:16',
-                'description' => 'max:255',
-            ]);
+        $validator = Validator::make($request->all(), [
+            'label'         => 'required|max:16|unique:group_egovernments,label,'.$id.',id,deleted_at,NULL',
+            'description'   => 'required|max:255',
+        ]);
+
+        if($validator->fails()){
+            $response['error']  = true;
+            $response['message'] = $validator->errors()->first();
         } else {
-            $validator = Validator::make($request->all(), [
-                'label' => 'required|max:16|unique:group_egovernments,label',
-                'description' => 'max:255',
-            ]);
-        }
-
-        if ($validator->fails()) {
-            $check = $group_egovernment->where('label',$request->label)->whereNull('deleted_at')->count();
-
-            if ($check > 0) {
-                $response['message'] = 'Failed, label ' . $request->label . ' already exists';
-            } else {
-                $group_egovernment->label = $request->input('label');
-                $group_egovernment->description = $request->input('description');
-                $group_egovernment->save();
-
-                $response['message'] = 'success';
-            }
-        } else {
-            $group_egovernment->label = $request->input('label');
-            $group_egovernment->description = $request->input('description');
+            $group_egovernment->label       = $request->label;
+            $group_egovernment->description = $request->description;
             $group_egovernment->save();
 
-            $response['message'] = 'success';
+            $response['error'] = false;
+            $response['message'] = 'Success';
         }
 
-        $response['status'] = true;
+        $response['loaded'] = true;
 
         return response()->json($response);
     }
@@ -209,9 +188,9 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
         if ($group_egovernment->delete()) {
-            $response['status'] = true;
+            $response['loaded'] = true;
         } else {
-            $response['status'] = false;
+            $response['loaded'] = false;
         }
 
         return json_encode($response);
