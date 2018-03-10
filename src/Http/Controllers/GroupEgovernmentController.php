@@ -91,7 +91,7 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment;
 
         $validator = Validator::make($request->all(), [
-            'label'         => 'required|max:16|unique:group_egovernments,label',
+            'label'         => 'required|max:16|unique:group_egovernments,label,NULL,id,deleted_at,NULL',
             'description'   => 'required|max:255',
         ]);
 
