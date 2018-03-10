@@ -69,9 +69,9 @@ class GroupEgovernmentController extends Controller
      */
     public function create()
     {
-        $group_egovernment = $this->group_egovernment;
-        $group_egovernment->id = null;
-        $group_egovernment->label = null;
+        $group_egovernment              = $this->group_egovernment;
+        $group_egovernment->id          = null;
+        $group_egovernment->label       = null;
         $group_egovernment->description = null;
 
         $response['group_egovernment'] = $group_egovernment;
@@ -91,28 +91,20 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment;
 
         $validator = Validator::make($request->all(), [
-            'label' => 'required|max:16|unique:group_egovernments,label',
-            'description' => 'max:255',
+            'label'         => 'required|max:16|unique:group_egovernments,label',
+            'description'   => 'required|max:255',
         ]);
 
         if($validator->fails()){
-            $check = $group_egovernment->where('label',$request->label)->whereNull('deleted_at')->count();
-
-            if ($check > 0) {
-                $response['message'] = 'Failed, label ' . $request->label . ' already exists';
-            } else {
-                $group_egovernment->label = $request->label;
-                $group_egovernment->description = $request->description;
-                $group_egovernment->save();
-
-                $response['message'] = 'success';
-            }
+            $response['error']  = true;
+            $response['message'] = $validator->errors()->first();
         } else {
-            $group_egovernment->label = $request->label;
+            $group_egovernment->label       = $request->label;
             $group_egovernment->description = $request->description;
             $group_egovernment->save();
 
-            $response['message'] = 'success';
+            $response['error'] = false;
+            $response['message'] = 'Success';
         }
 
         $response['loaded'] = true;
@@ -163,37 +155,21 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
-        if ($request->old_label == $request->label)
-        {
-            $validator = Validator::make($request->all(), [
-                'label' => 'required|max:16',
-                'description' => 'max:255',
-            ]);
+        $validator = Validator::make($request->all(), [
+            'label'         => 'required|max:16|unique:group_egovernments,label,'.$id,
+            'description'   => 'required|max:255',
+        ]);
+
+        if($validator->fails()){
+            $response['error']  = true;
+            $response['message'] = $validator->errors()->first();
         } else {
-            $validator = Validator::make($request->all(), [
-                'label' => 'required|max:16|unique:group_egovernments,label',
-                'description' => 'max:255',
-            ]);
-        }
-
-        if ($validator->fails()) {
-            $check = $group_egovernment->where('label',$request->label)->whereNull('deleted_at')->count();
-
-            if ($check > 0) {
-                $response['message'] = 'Failed, label ' . $request->label . ' already exists';
-            } else {
-                $group_egovernment->label = $request->label;
-                $group_egovernment->description = $request->description;
-                $group_egovernment->save();
-
-                $response['message'] = 'success';
-            }
-        } else {
-            $group_egovernment->label = $request->label;
+            $group_egovernment->label       = $request->label;
             $group_egovernment->description = $request->description;
             $group_egovernment->save();
 
-            $response['message'] = 'success';
+            $response['error'] = false;
+            $response['message'] = 'Success';
         }
 
         $response['loaded'] = true;

@@ -13,36 +13,46 @@
     </div>
 
     <div class="card-body">
-      <vue-form class="form-horizontal form-validation" :state="state" @submit.prevent="onSubmit">
-        <div class="form-row">
-          <div class="col-md">
-            <validate tag="div">
-              <input type="hidden" v-model="model.old_label" name="old_label">
-              <input class="form-control" v-model="model.label" required autofocus name="label" type="text" placeholder="Label">
+      <vue-form :state="state" @submit.prevent="onSubmit">
+
+        <validate tag="div">
+          <div class="form-group row">
+            <label for="model-label" class="col-sm-2 col-form-label">Label</label>
+
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="model-label" v-model="model.label" name="label" placeholder="Label" required autofocus>
 
               <field-messages name="label" show="$invalid && $submitted" class="text-danger">
                 <small class="form-text text-success">Looks good!</small>
-                <small class="form-text text-danger" slot="required">Label is a required field</small>
+                <small class="form-text text-danger" slot="required">This field is a required field</small>
               </field-messages>
-            </validate>
+            </div>
           </div>
+        </validate>
 
-          <div class="col-md">
-            <validate tag="div">
-              <input class="form-control" v-model="model.description" name="description" type="text" placeholder="Description">
+        <validate tag="div">
+          <div class="form-group row">
+            <label for="model-description" class="col-sm-2 col-form-label">Description</label>
+
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="model-description" v-model="model.description" name="description" placeholder="Description" required>
 
               <field-messages name="description" show="$invalid && $submitted" class="text-danger">
                 <small class="form-text text-success">Looks good!</small>
+                <small class="form-text text-danger" slot="required">This field is a required field</small>
               </field-messages>
-            </validate>
+            </div>
           </div>
+        </validate>
 
-          <div class="col-auto">
+        <div class="form-group row">
+          <div class="col-sm-10 offset-sm-2">
             <button type="submit" class="btn btn-primary">Submit</button>
 
             <button type="reset" class="btn btn-secondary" @click="reset">Reset</button>
           </div>
         </div>
+
       </vue-form>
     </div>
   </div>
@@ -65,7 +75,6 @@ export default {
       .then(response => {
         if (response.data.loaded == true) {
           this.model.label = response.data.group_egovernment.label;
-          this.model.old_label = response.data.group_egovernment.label;
           this.model.description = response.data.group_egovernment.description;
         } else {
           alert('Failed');
@@ -85,23 +94,22 @@ export default {
       } else {
         axios.put('api/group-egovernment/' + this.$route.params.id, {
             label: this.model.label,
-            description: this.model.description,
-            old_label: this.model.old_label
+            description: this.model.description
           })
           .then(response => {
             if (response.data.loaded == true) {
-              if(response.data.message == 'success'){
+              if(response.data.error == false){
                 alert(response.data.message);
                 app.back();
               }else{
                 alert(response.data.message);
               }
             } else {
-              alert(response.data.message);
+              alert('Failed');
             }
           })
           .catch(function(response) {
-            alert('Break ' + response.data.message);
+            alert('Break');
           });
       }
     },
@@ -116,7 +124,8 @@ export default {
           }
         })
         .catch(function(response) {
-          alert('Break ');
+          alert('Break');
+          window.location.href = '#/admin/group-egovernment';
         });
     },
     back() {

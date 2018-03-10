@@ -35,7 +35,7 @@
             <label for="model-description" class="col-sm-2 col-form-label">Description</label>
 
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="model-description" v-model="model.description" name="description" placeholder="Description" required autofocus>
+              <input type="text" class="form-control" id="model-description" v-model="model.description" name="description" placeholder="Description" required>
 
               <field-messages name="description" show="$invalid && $submitted" class="text-danger">
                 <small class="form-text text-success">Looks good!</small>
@@ -98,18 +98,18 @@ export default {
           })
           .then(response => {
             if (response.data.loaded == true) {
-              if(response.data.message == 'success'){
+              if(response.data.error == false){
                 alert(response.data.message);
                 app.back();
               }else{
                 alert(response.data.message);
               }
             } else {
-              alert(response.data.message);
+              alert('Failed');
             }
           })
           .catch(function(response) {
-            alert('Break ' + response.data.message);
+            alert('Break');
           });
       }
     },
