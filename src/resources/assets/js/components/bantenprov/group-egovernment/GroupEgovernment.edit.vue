@@ -16,41 +16,30 @@
       <vue-form :state="state" @submit.prevent="onSubmit">
 
         <validate tag="div">
-          <div class="form-group row">
-            <label for="model-label" class="col-sm-2 col-form-label">Label</label>
-
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="model-label" v-model="model.label" name="label" placeholder="Label" required autofocus>
-
-              <field-messages name="label" show="$invalid && $submitted" class="text-danger">
-                <small class="form-text text-success">Looks good!</small>
-                <small class="form-text text-danger" slot="required">This field is a required field</small>
-              </field-messages>
-            </div>
+          <div class="form-group">
+            <label for="model-label">Label</label>
+            <input type="text" class="form-control" id="model-label" v-model="model.label" name="label" placeholder="Label" required autofocus>
+            <field-messages name="label" show="$invalid && $submitted" class="text-danger">
+              <small class="form-text text-success">Looks good!</small>
+              <small class="form-text text-danger" slot="required">This field is a required field</small>
+            </field-messages>
           </div>
         </validate>
 
         <validate tag="div">
-          <div class="form-group row">
-            <label for="model-description" class="col-sm-2 col-form-label">Description</label>
-
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="model-description" v-model="model.description" name="description" placeholder="Description" required>
-
-              <field-messages name="description" show="$invalid && $submitted" class="text-danger">
-                <small class="form-text text-success">Looks good!</small>
-                <small class="form-text text-danger" slot="required">This field is a required field</small>
-              </field-messages>
-            </div>
+          <div class="form-group">
+            <label for="model-description">Description</label>
+            <input type="text" class="form-control" id="model-description" v-model="model.description" name="description" placeholder="Description" required>
+            <field-messages name="description" show="$invalid && $submitted" class="text-danger">
+              <small class="form-text text-success">Looks good!</small>
+              <small class="form-text text-danger" slot="required">This field is a required field</small>
+            </field-messages>
           </div>
         </validate>
 
-        <div class="form-group row">
-          <div class="col-sm-10 offset-sm-2">
-            <button type="submit" class="btn btn-primary">Submit</button>
-
-            <button type="reset" class="btn btn-secondary" @click="reset">Reset</button>
-          </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-secondary" @click="reset">Reset</button>
         </div>
 
       </vue-form>
