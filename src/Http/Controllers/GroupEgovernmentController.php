@@ -5,7 +5,7 @@ namespace Bantenprov\GroupEgovernment\Http\Controllers;
 /* Require */
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Bantenprov\BudgetAbsorption\Facades\GroupEgovernmentFacade;
+use Bantenprov\GroupEgovernment\Facades\GroupEgovernmentFacade;
 
 /* Models */
 use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment;
