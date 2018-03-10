@@ -63,10 +63,10 @@ export default {
   data() {
     return {
       state: {},
-      title: "Edit Group Egovernment",
+      title: 'Edit Group Egovernment',
       model: {
-        label       : "",
-        description : ""
+        label       : '',
+        description : ''
       }
     }
   },
