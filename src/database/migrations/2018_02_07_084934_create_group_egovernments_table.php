@@ -14,8 +14,9 @@ class CreateGroupEgovernmentsTable extends Migration
 	{
 		Schema::create('group_egovernments', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('label', 255);
-			$table->string('description', 255)->nullable();
+			$table->string('label');
+			$table->string('description');
+			$table->integer('user_id');
 			$table->timestamps();
 			$table->softDeletes();
 		});
