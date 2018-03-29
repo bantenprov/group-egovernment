@@ -9,6 +9,7 @@ use Bantenprov\GroupEgovernment\Facades\GroupEgovernmentFacade;
 
 /* Models */
 use Bantenprov\GroupEgovernment\Models\Bantenprov\GroupEgovernment\GroupEgovernment;
+use App\User;
 
 /* Etc */
 use Validator;
@@ -26,9 +27,13 @@ class GroupEgovernmentController extends Controller
      *
      * @return void
      */
-    public function __construct(GroupEgovernment $group_egovernment)
+    protected $group_egovernment;
+    protected $user;
+
+    public function __construct(GroupEgovernment $group_egovernment, User $user)
     {
-        $this->group_egovernment = $group_egovernment;
+        $this->group_egovernment    = $group_egovernment;
+        $this->user                 = $user;
     }
 
     /**
@@ -55,7 +60,7 @@ class GroupEgovernmentController extends Controller
         }
 
         $perPage = $request->has('per_page') ? (int) $request->per_page : null;
-        $response = $query->paginate($perPage);
+        $response = $query->with('user')->paginate($perPage);
 
         return response()->json($response)
             ->header('Access-Control-Allow-Origin', '*')
@@ -69,13 +74,14 @@ class GroupEgovernmentController extends Controller
      */
     public function create()
     {
-        $group_egovernment              = $this->group_egovernment;
-        $group_egovernment->id          = null;
-        $group_egovernment->label       = null;
-        $group_egovernment->description = null;
+        $users           = $this->user->all();
 
-        $response['group_egovernment'] = $group_egovernment;
-        $response['loaded'] = true;
+        foreach ($users as $user) {
+            array_set($user, 'label', $user->name);
+        }
+
+        $response['user']               = $users;
+        $response['status']             = true;
 
         return response()->json($response);
     }
@@ -91,23 +97,34 @@ class GroupEgovernmentController extends Controller
         $group_egovernment = $this->group_egovernment;
 
         $validator = Validator::make($request->all(), [
-            'label'         => 'required|max:16|unique:group_egovernments,label,NULL,id,deleted_at,NULL',
-            'description'   => 'required|max:255',
+            'user_id'       => 'required',
+            'label'         => 'required|unique:group_egovernments,label',
+            'description'   => 'required',
         ]);
 
         if($validator->fails()){
-            $response['error']  = true;
-            $response['message'] = $validator->errors()->first();
-        } else {
-            $group_egovernment->label       = $request->label;
-            $group_egovernment->description = $request->description;
-            $group_egovernment->save();
+            $check = $group_egovernment->where('label',$request->label)->whereNull('deleted_at')->count();
 
-            $response['error'] = false;
-            $response['message'] = 'Success';
+            if ($check > 0) {
+                $response['message'] = 'Failed, label ' . $request->label . ' already exists';
+            } else {
+                $group_egovernment->label         = $request->input('label');
+                $group_egovernment->description   = $request->input('description');
+                $group_egovernment->user_id       = $request->input('user_id');
+                $group_egovernment->save();
+
+                $response['message'] = 'success';
+            }
+        } else {
+                $group_egovernment->label         = $request->input('label');
+                $group_egovernment->description   = $request->input('description');
+                $group_egovernment->user_id       = $request->input('user_id');
+                $group_egovernment->save();
+
+                $response['message'] = 'success';
         }
 
-        $response['loaded'] = true;
+        $response['status'] = true;
 
         return response()->json($response);
     }
@@ -122,8 +139,9 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
-        $response['group_egovernment'] = $group_egovernment;
-        $response['loaded'] = true;
+        $response['user']               = $group_egovernment->user;
+        $response['group_egovernment']  = $group_egovernment;
+        $response['status']             = true;
 
         return response()->json($response);
     }
@@ -138,8 +156,11 @@ class GroupEgovernmentController extends Controller
     {
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
-        $response['group_egovernment'] = $group_egovernment;
-        $response['loaded'] = true;
+        array_set($group_egovernment->user, 'label', $group_egovernment->user->name);
+
+        $response['user']               = $group_egovernment->user;
+        $response['group_egovernment']  = $group_egovernment;
+        $response['status']             = true;
 
         return response()->json($response);
     }
@@ -152,27 +173,51 @@ class GroupEgovernmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        $response = array();
+        $message  = array();
+
         $group_egovernment = $this->group_egovernment->findOrFail($id);
 
-        $validator = Validator::make($request->all(), [
-            'label'         => 'required|max:16|unique:group_egovernments,label,'.$id.',id,deleted_at,NULL',
-            'description'   => 'required|max:255',
-        ]);
+            $validator = Validator::make($request->all(), [
+                'label'                 => 'required|unique:group_egovernments,label,'.$id,
+                'description'           => 'required',
+                'user_id'               => 'required',
+            ]);
 
-        if($validator->fails()){
-            $response['error']  = true;
-            $response['message'] = $validator->errors()->first();
+            if($validator->fails()){
+
+                foreach($validator->messages()->getMessages() as $key => $error){
+                    foreach($error AS $error_get) {
+                        array_push($message, $error_get);
+                    }                
+                } 
+
+                $check_label   = $this->group_egovernment->where('id','!=', $id)->where('label', $request->label);
+
+                if($check_label->count() > 0){
+                    $response['message'] = implode("\n",$message);
+
+            } else {
+                $group_egovernment->label                    = $request->input('label');
+                $group_egovernment->description              = $request->input('description');
+                $group_egovernment->user_id                  = $request->input('user_id');
+                $group_egovernment->save();
+
+                $response['message'] = 'success';
+            }
+
         } else {
-            $group_egovernment->label       = $request->label;
-            $group_egovernment->description = $request->description;
-            $group_egovernment->save();
+                $group_egovernment->label                    = $request->input('label');
+                $group_egovernment->description              = $request->input('description');
+                $group_egovernment->user_id                  = $request->input('user_id');
+                $group_egovernment->save();
 
-            $response['error'] = false;
-            $response['message'] = 'Success';
-        }
+                $response['message'] = 'success';
 
-        $response['loaded'] = true;
+        }    
+
+        $response['status'] = true;
 
         return response()->json($response);
     }

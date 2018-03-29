@@ -16,7 +16,12 @@ class GroupEgovernment extends Model
         'deleted_at'
     ];
     protected $fillable = [
+        'user_id',
         'label',
         'description',
     ];
+     public function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
 }

@@ -38,9 +38,9 @@
           @vuetable:loaded="onLoaded">
           <template slot="actions" slot-scope="props">
             <div class="btn-group pull-right" role="group" style="display:flex;">
-              <!--<button class="btn btn-info btn-sm" role="button" @click="viewRow(props.rowData)">
+              <button class="btn btn-info btn-sm" role="button" @click="viewRow(props.rowData)">
                 <span class="fa fa-eye"></span>
-              </button>-->
+              </button>
               <button class="btn btn-warning btn-sm" role="button" @click="editRow(props.rowData)">
                 <span class="fa fa-pencil"></span>
               </button>
@@ -104,6 +104,12 @@ export default {
           titleClass: 'center aligned'
         },
         {
+          name: 'user.name',
+          title: 'Username',
+          sortField: 'user_id',
+          titleClass: 'center aligned'
+        },
+        {
           name: '__slot:actions',
           title: 'Actions',
           titleClass: 'center aligned',
@@ -141,9 +147,13 @@ export default {
     createRow() {
       window.location = '#/admin/group-egovernment/create';
     },
-    viewRow(rowData) {
+    /*viewRow(rowData) {
       window.location = '#/admin/group-egovernment/' + rowData.id;
+    },*/
+    viewRow(rowData) {
+      window.location = '#/group-egovernment/' + rowData.id;
     },
+
     editRow(rowData) {
       window.location = '#/admin/group-egovernment/' + rowData.id + '/edit';
     },
