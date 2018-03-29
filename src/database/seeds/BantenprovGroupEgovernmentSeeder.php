@@ -22,7 +22,7 @@ class BantenprovGroupEgovernmentSeeder extends Seeder
 
     /* File name */
     /* location : /databse/seeds/file_name.csv */
-    protected $fileName = "BantenprovGroupEgovermentSeeder.csv";
+    protected $fileName = "BantenprovGroupEgovernmentSeeder.csv";
 
     /* text info : default (true) */
     protected $textInfo = true;
