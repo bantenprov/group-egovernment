@@ -243,6 +243,10 @@ Vue.component('echarts-group-egovernment-tahun', GroupEgovernmentTahun);
 import GroupEgovernmentAdminShow from './components/bantenprov/group-egovernment/GroupEgovernmentAdmin.show.vue';
 Vue.component('admin-view-group-egovernment-tahun', GroupEgovernmentAdminShow);
 
+import GroupEgovernmentList from './components/bantenprov/group-egovernment/partials/GroupEgovernmentList.vue';
+Vue.component('group-egovernment-list', GroupEgovernmentList)
+
+
 //== Echarts Group Egoverment
 
 import GroupEgovernmentBar01 from './components/views/bantenprov/group-egovernment/GroupEgovernmentBar01.vue';
