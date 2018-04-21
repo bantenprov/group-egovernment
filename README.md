@@ -27,7 +27,7 @@ $ composer require bantenprov/group-egovernment:dev-master
 - Latest release:
 
 ```bash
-$ composer require bantenprov/group-egovernment
+$ composer require bantenprov/group-egovernment:v0.1
 ```
 
 ### Download via github
